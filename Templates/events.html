@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Events & Opportunities</h2>
+<a href="/events/add" class="button">Add Event</a>
+
+<hr>
+
+{% if events %}
+    {% for e in events %}
+        <div class="card">
+            <h3>{{ e.title }}</h3>
+            <p><b>Date:</b> {{ e.event_date }}</p>
+            <p><b>Location:</b> {{ e.location }}</p>
+            {% if e.description %}
+                <p>{{ e.description }}</p>
+            {% endif %}
+            <small>Posted on {{ e.created_at }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No events yet. Add one!</p>
+{% endif %}
+
+{% endblock %}

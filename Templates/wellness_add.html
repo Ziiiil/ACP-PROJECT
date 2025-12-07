@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Wellness Entry</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.date.label }}</label>
+    {{ form.date(class="input") }}
+
+    <label>{{ form.mood.label }}</label>
+    {{ form.mood(class="input") }}
+
+    <label>{{ form.steps.label }}</label>
+    {{ form.steps(class="input") }}
+
+    <label>{{ form.notes.label }}</label>
+    {{ form.notes(class="textarea") }}
+
+    {{ form.submit(class="button") }}
+</form>
+
+{% endblock %}

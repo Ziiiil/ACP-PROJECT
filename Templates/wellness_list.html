@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Wellness Tracker</h2>
+<a href="/wellness/add" class="button">Add Wellness Entry</a>
+
+<hr>
+
+{% if entries %}
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Mood</th>
+        <th>Steps</th>
+        <th>Notes</th>
+    </tr>
+
+    {% for w in entries %}
+    <tr>
+        <td>{{ w.date }}</td>
+        <td>{{ w.mood }}</td>
+        <td>{{ w.steps }}</td>
+        <td>{{ w.notes }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No wellness entries yet. Start tracking now!</p>
+{% endif %}
+
+{% endblock %}

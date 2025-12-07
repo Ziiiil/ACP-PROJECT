@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Community Forum</h2>
+<a href="/forum/add" class="button">Create New Post</a>
+
+<hr>
+
+{% if posts %}
+    {% for p in posts %}
+        <div class="card">
+            <h3>{{ p.title }}</h3>
+            <p><b>By:</b> {{ p.username }}</p>
+            <p>{{ p.content }}</p>
+            <small>Posted on {{ p.created_at }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No posts yet. Be the first to share!</p>
+{% endif %}
+
+{% endblock %}

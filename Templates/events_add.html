@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Event</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.title.label }}</label>
+    {{ form.title(class="input") }}
+
+    <label>{{ form.description.label }}</label>
+    {{ form.description(class="textarea") }}
+
+    <label>{{ form.event_date.label }}</label>
+    {{ form.event_date(class="input") }}
+
+    <label>{{ form.location.label }}</label>
+    {{ form.location(class="input") }}
+
+    {{ form.submit(class="button") }}
+</form>
+
+{% endblock %}

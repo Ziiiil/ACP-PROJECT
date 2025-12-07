@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Create Forum Post</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.username.label }}</label>
+    {{ form.username(class="input") }}
+
+    <label>{{ form.title.label }}</label>
+    {{ form.title(class="input") }}
+
+    <label>{{ form.content.label }}</label>
+    {{ form.content(class="textarea") }}
+
+    {{ form.submit(class="button") }}
+</form>
+
+{% endblock %}
