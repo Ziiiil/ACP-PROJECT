@@ -1,9 +1,11 @@
 from flask import Flask
 from config import Config
-from models import db
-from forms import csrf
-from routes.main_routes import main_bp
-from routes.wellness_routes import wellness_bp
+from Models import db
+from Forms import csrf
+from Routes.main_routes import main_bp
+from Routes.wellness_routes import wellness_bp
+from Routes.event_routes import event_bp
+from Routes.forum_routes import forum_bp
 
 def create_app():
     app = Flask(__name__)
@@ -19,6 +21,8 @@ def create_app():
     # Register blueprints
     app.register_blueprint(main_bp)
     app.register_blueprint(wellness_bp, url_prefix="/wellness")
+    app.register_blueprint(event_bp, url_prefix="/events")
+    app.register_blueprint(forum_bp, url_prefix="/forum")
 
     return app
 

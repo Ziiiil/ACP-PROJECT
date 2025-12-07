@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect
-from models.event_model import Event
-from models import db
-from forms.event_form import EventForm
+from Models.event_model import Event
+from Models import db
+from Forms.event_form import EventForm
 
 event_bp = Blueprint("events", __name__)
 

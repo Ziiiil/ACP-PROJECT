@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect
-from models.forum_model import ForumPost
-from models import db
-from forms.forum_form import ForumForm
+from Models.forum_model import ForumPost
+from Models import db
+from Forms.forum_form import ForumForm
 
 forum_bp = Blueprint("forum", __name__)
 

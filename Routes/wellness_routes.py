@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect
-from models.wellness_model import WellnessEntry
-from models import db
-from forms.wellness_form import WellnessForm
+from Models.wellness_model import WellnessEntry
+from Models import db
+from Forms.wellness_form import WellnessForm
 
 wellness_bp = Blueprint("wellness", __name__)
 

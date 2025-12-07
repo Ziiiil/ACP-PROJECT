@@ -1,5 +1,5 @@
 # ---------------- IMPORTS ----------------
-from models import db
+from Models import db
 from datetime import datetime
 
 
