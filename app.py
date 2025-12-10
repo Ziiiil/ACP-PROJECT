@@ -1,8 +1,11 @@
 from flask import Flask, Blueprint, render_template, redirect
-from config import Config
 from models import db, Event, WellnessEntry, ForumPost
 from forms import csrf, EventForm, WellnessForm, ForumForm
 
+class Config:
+    SQLALCHEMY_DATABASE_URI = "sqlite:///final_project_db.db"
+    SECRET_KEY = "supersecretkey123"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 def create_app():
     app = Flask(__name__)
