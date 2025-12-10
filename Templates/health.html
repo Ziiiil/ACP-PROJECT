@@ -1,15 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Health & Wellness Hub</h2>
-<p>Access articles, infographics, and videos about:</p>
+<h2 class="page-title">Health & Wellness Hub</h2>
+<p class="page-subtitle">
+    Your go-to space for improving physical, mental, and emotional health.
+</p>
 
-<ul>
-    <li>Nutrition</li>
-    <li>Exercise</li>
-    <li>Mental Health</li>
-</ul>
+<!-- CATEGORY CARDS -->
+<section class="health-grid">
 
-<p>(You can expand this module later with dynamic content)</p>
+    <div class="card health-card">
+        <h3>🥗 Nutrition</h3>
+        <p>
+            Explore healthy eating tips, meal plans, and nutrition guides to keep your body fuelled and energized.
+        </p>
+        <a href="#" class="button">Learn More</a>
+    </div>
+
+    <div class="card health-card">
+        <h3>🏋️ Exercise</h3>
+        <p>
+            Access workout routines, physical activity suggestions, and fitness programs for all ages.
+        </p>
+        <a href="#" class="button">Start Training</a>
+    </div>
+
+    <div class="card health-card">
+        <h3>🧠 Mental Health</h3>
+        <p>
+            Find resources, coping strategies, and guides to maintaining emotional wellness and mental resilience.
+        </p>
+        <a href="#" class="button">Explore Support</a>
+    </div>
+
+</section>
+
+<!-- FUTURE MODULE MESSAGE -->
+<div class="info-box">
+    <p>✨ More wellness content will be added soon — including articles, videos, trackers, and interactive tools!</p>
+</div>
 
 {% endblock %}

@@ -1,10 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Welcome to our flask website project</h1>
-<p>
-    Explore articles, improve your skills, join community discussions,
-    track your wellness, and stay updated with local events.
-</p>
+<!-- HERO SECTION -->
+<section class="hero">
+    <h1>Welcome to the Community Wellness & Livelihood Hub</h1>
+    <p class="subtitle">
+        Empowering individuals through wellness, learning, and community support.
+    </p>
+
+    <a href="/health" class="button hero-btn">Get Started</a>
+</section>
+
+<hr class="divider">
+
+<!-- FEATURE CARDS -->
+<section class="features">
+    <div class="card">
+        <h3>💪 Health & Wellness</h3>
+        <p>
+            Access wellness tips, track your daily habits, and learn how to
+            maintain a balanced lifestyle.
+        </p>
+        <a href="/health" class="button">Explore Wellness</a>
+    </div>
+
+    <div class="card">
+        <h3>📚 Livelihood Center</h3>
+        <p>
+            Improve your skills with livelihood programs, job opportunities,
+            and skill-building guides.
+        </p>
+        <a href="/livelihood" class="button">Visit Livelihood Center</a>
+    </div>
+
+    <div class="card">
+        <h3>💬 Community Forum</h3>
+        <p>
+            Join discussions, share ideas, and connect with people who care
+            about growth and well-being.
+        </p>
+        <a href="/forum" class="button">Join Forum</a>
+    </div>
+
+    <div class="card">
+        <h3>📅 Events & Opportunities</h3>
+        <p>
+            Stay updated with upcoming events, workshops, and local community activities.
+        </p>
+        <a href="/events" class="button">See Events</a>
+    </div>
+
+    <div class="card">
+        <h3>🧘 Wellness Tracker</h3>
+        <p>
+            Monitor your goals, track progress, and maintain a healthy routine daily.
+        </p>
+        <a href="/wellness" class="button">Track Wellness</a>
+    </div>
+</section>
 
 {% endblock %}
+

@@ -1,15 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Livelihood Learning Center</h2>
-<p>Learn through free tutorials and business guides:</p>
+<h2 class="page-title">Livelihood Learning Center</h2>
+<p class="page-subtitle">
+    Build practical skills, gain confidence, and unlock new livelihood opportunities.
+</p>
 
-<ul>
-    <li>Basic Entrepreneurship</li>
-    <li>Job Readiness Training</li>
-    <li>Small Business Management</li>
-</ul>
+<!-- LIVELIHOOD SKILL CARDS -->
+<section class="livelihood-grid">
 
-<p>(Static module for now — can be expanded later)</p>
+    <div class="card livelihood-card">
+        <h3>💼 Basic Entrepreneurship</h3>
+        <p>
+            Learn the foundations of starting a small business: planning, budgeting,
+            marketing, and customer relations.
+        </p>
+        <a href="#" class="button">Start Learning</a>
+    </div>
+
+    <div class="card livelihood-card">
+        <h3>📝 Job Readiness Training</h3>
+        <p>
+            Improve job search skills, resume building, interview techniques,
+            and workplace professionalism.
+        </p>
+        <a href="#" class="button">Begin Training</a>
+    </div>
+
+    <div class="card livelihood-card">
+        <h3>📦 Small Business Management</h3>
+        <p>
+            Discover how to manage finances, inventory, operations, and customer service
+            to keep your business thriving.
+        </p>
+        <a href="#" class="button">View Guides</a>
+    </div>
+
+</section>
+
+<!-- FUTURE MODULE REMINDER -->
+<div class="info-box">
+    <p>🚀 More livelihood programs, video lessons, and downloadable tools will be added soon!</p>
+</div>
 
 {% endblock %}
