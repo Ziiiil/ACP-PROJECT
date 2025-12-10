@@ -1,20 +1,38 @@
-/* Global styles */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f2f5;
-    margin: 0;
-    padding: 0;
-    color: #333;
+/* ------------------------------
+   Global Styles
+--------------------------------*/
+:root {
+    --primary: #0275d8;
+    --primary-dark: #025aa5;
+    --bg: #f0f2f5;
+    --card-bg: #fff;
+    --text: #333;
+    --radius: 8px;
+    --shadow-sm: 0 2px 6px rgba(0,0,0,0.05);
+    --shadow-md: 0 5px 15px rgba(0,0,0,0.12);
 }
 
-/* Navigation bar */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+
+/* ------------------------------
+   Navigation Bar
+--------------------------------*/
 nav {
     background: #333;
     padding: 20px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    box-shadow: var(--shadow-md);
 }
 
 nav h2 {
@@ -23,57 +41,126 @@ nav h2 {
     font-size: 1.8rem;
 }
 
-nav a {
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
     color: #fff;
-    margin-left: 20px;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
-nav a:hover {
-    color: #0275d8;
+.nav-links a:hover {
+    color: var(--primary);
 }
 
-/* Container */
+nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    bottom: -4px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+/* ------------------------------
+   Container
+--------------------------------*/
 .container {
     padding: 30px 40px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Buttons */
+/* ------------------------------
+   Hero Section
+--------------------------------*/
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to right, #e7f1ff, #f4faff);
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+}
+
+.hero h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.hero .subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.hero-btn {
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
+
+/* ------------------------------
+   Features Grid
+--------------------------------*/
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Divider line */
+.divider {
+    margin: 40px 0;
+    border: 0;
+    border-top: 2px solid #ddd;
+}
+
+/* ------------------------------
+   Buttons
+--------------------------------*/
 .button {
-    background: #0275d8;
+    background: var(--primary);
     color: #fff;
     padding: 12px 20px;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: var(--radius);
     display: inline-block;
     font-weight: 600;
+    cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
-    background: #025aa5;
+    background: var(--primary-dark);
     transform: translateY(-2px);
 }
 
-/* Input fields and textareas */
+
+/* ------------------------------
+   Inputs & Textarea
+--------------------------------*/
 .input, .textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: var(--radius);
     font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .input:focus, .textarea:focus {
-    border-color: #0275d8;
-    box-shadow: 0 0 5px rgba(2, 117, 216, 0.3);
+    border-color: var(--primary);
+    box-shadow: 0 0 6px rgba(2, 117, 216, 0.3);
     outline: none;
 }
 
@@ -82,30 +169,36 @@ nav a:hover {
     resize: vertical;
 }
 
-/* Cards */
+
+/* ------------------------------
+   Cards
+--------------------------------*/
 .card {
-    background: #fff;
+    background: var(--card-bg);
     padding: 20px;
     margin-bottom: 20px;
-    border-left: 5px solid #0275d8;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    border-radius: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 6px solid var(--primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
 }
 
-/* Tables */
+
+/* ------------------------------
+   Tables
+--------------------------------*/
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
+    background: var(--card-bg);
+    border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
 }
 
 table th, table td {
@@ -114,7 +207,7 @@ table th, table td {
 }
 
 table th {
-    background: #0275d8;
+    background: var(--primary);
     color: #fff;
     font-weight: 600;
 }
@@ -127,15 +220,21 @@ table tr:hover {
     background: #e6f0fa;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+
+/* ------------------------------
+   Responsive Adjustments
+--------------------------------*/
+@media (max-width: 900px) {
+
     nav {
         flex-direction: column;
         align-items: flex-start;
+        gap: 15px;
     }
 
-    nav a {
-        margin: 10px 0 0 0;
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 15px;
     }
 
     .container {
@@ -143,30 +242,174 @@ table tr:hover {
     }
 }
 
+@media (max-width: 600px) {
 
-.input, .textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    nav h2 {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
 
-.textarea {
-    height: 100px;
+/* ------------------------------
+   Page Titles
+--------------------------------*/
+.page-title {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
 }
 
-.card {
-    background: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-left: 5px solid #0275d8;
+.page-subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+
+/* ------------------------------
+   Health Category Grid
+--------------------------------*/
+.health-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
 }
 
-table th, table td {
-    padding: 10px;
-    border: 1px solid #ccc;
+.health-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
 }
+
+.health-card p {
+    margin-bottom: 18px;
+}
+
+
+/* ------------------------------
+   Info Box (for future modules)
+--------------------------------*/
+.info-box {
+    background: #e9f3ff;
+    padding: 20px;
+    border-left: 5px solid var(--primary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    margin-top: 20px;
+    font-size: 1.05rem;
+}
+
+/* ------------------------------
+   Livelihood Card Grid
+--------------------------------*/
+.livelihood-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.livelihood-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.livelihood-card p {
+    margin-bottom: 18px;
+}
+
+/* ------------------------------
+   Footer
+--------------------------------*/
+footer {
+    background: #222;
+    color: #ddd;
+    padding: 40px 40px 20px;
+    margin-top: 40px;
+    box-shadow: 0 -3px 6px rgba(0,0,0,0.15);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.footer-section p {
+    margin: 8px 0;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.footer-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary);
+}
+
+/* Social Icons */
+.social-links a {
+    font-size: 1.5rem;
+    margin-right: 12px;
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Footer bottom */
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* Responsive spacing */
+@media (max-width: 600px) {
+    footer {
+        padding: 30px 20px;
+    }
+}
+
+
+
