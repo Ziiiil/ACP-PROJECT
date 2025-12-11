@@ -7,34 +7,144 @@
 </p>
 
 <!-- LIVELIHOOD SKILL CARDS -->
-<section class="livelihood-grid">
-
-    <div class="card livelihood-card">
-        <h3>💼 Basic Entrepreneurship</h3>
-        <p>
-            Learn the foundations of starting a small business: planning, budgeting,
-            marketing, and customer relations.
-        </p>
-        <a href="#" class="button">Start Learning</a>
+<div class="card livelihood-card">
+    <h3>💼 Basic Entrepreneurship</h3>
+    <p>Learn the foundations of starting a small business: planning, budgeting, marketing, and customer relations.</p>
+    <button class="button startLearningBtn">Start Learning</button>
+    <div class="foundations" style="display: none;  margin-top: 10px;">
+        <ol>
+            <li><strong>Business Planning Basics</strong>
+                <ul>
+                    <li>How to choose a business idea</li>
+                    <li>Identifying your target customers</li>
+                    <li>Setting goals for your business</li>
+                    <li>Simple business plan templates</li>
+                </ul>
+            </li>
+            <li><strong>Budgeting & Financial Management</strong>
+                <ul>
+                    <li>Starting capital & estimating startup costs</li>
+                    <li>Tracking daily sales & expenses</li>
+                    <li>Simple profit and loss calculation</li>
+                    <li>Saving and reinvesting profits</li>
+                </ul>
+            </li>
+            <li><strong>Marketing Essentials</strong>
+                <ul>
+                    <li>How to promote your business with zero budget</li>
+                    <li>Using social media (FB, TikTok)</li>
+                    <li>Making appealing product photos</li>
+                    <li>Building customer trust</li>
+                </ul>
+            </li>
+            <li><strong>Customer Relations</strong>
+                <ul>
+                    <li>Proper communication and respect</li>
+                    <li>Handling complaints</li>
+                    <li>Giving value to loyal customers</li>
+                    <li>Basic customer service techniques</li>
+                </ul>
+            </li>
+        </ol>
     </div>
+</div>
 
-    <div class="card livelihood-card">
-        <h3>📝 Job Readiness Training</h3>
-        <p>
-            Improve job search skills, resume building, interview techniques,
-            and workplace professionalism.
-        </p>
-        <a href="#" class="button">Begin Training</a>
+<div class="card livelihood-card">
+    <h3>💼 Job Readiness Training</h3>
+    <p>Improve job search skills, resume building, interview techniques, and workplace professionalism.</p>
+    <button class="button startLearningBtn">Begin Training</button>
+    <div class="foundations" style="display: none; margin-top: 10px;">
+        <ol>
+            <li><strong>Resume Building</strong>
+                <ul>
+                    <li>Writing a strong resume</li>
+                    <li>Tailoring resumes for jobs</li>
+                    <li>Highlighting key skills</li>
+                </ul>
+            </li>
+            <li><strong>Interview Techniques</strong>
+                <ul>
+                    <li>Common interview questions</li>
+                    <li>Professional etiquette</li>
+                    <li>Body language & confidence</li>
+                </ul>
+            </li>
+            <li><strong>Job Search Skills</strong>
+                <ul>
+                    <li>Effective job searching</li>
+                    <li>Networking & referrals</li>
+                    <li>Using job platforms</li>
+                </ul>
+            </li>
+            <li><strong>Workplace Professionalism</strong>
+                <ul>
+                    <li>Time management</li>
+                    <li>Communication skills</li>
+                    <li>Teamwork & respect</li>
+                </ul>
+            </li>
+        </ol>
     </div>
+</div>
 
-    <div class="card livelihood-card">
-        <h3>📦 Small Business Management</h3>
-        <p>
-            Discover how to manage finances, inventory, operations, and customer service
-            to keep your business thriving.
-        </p>
-        <a href="#" class="button">View Guides</a>
+<div class="card livelihood-card">
+    <h3>📦 Small Business Management</h3>
+    <p>Discover how to manage finances, inventory, operations, and customer service to keep your business thriving.</p>
+    <button class="button startLearningBtn">View Guides</button>
+    <div class="foundations" style="display: none; margin-top: 10px;">
+        <ol>
+            <li><strong>Finance Management</strong>
+                <ul>
+                    <li>Budgeting & cost tracking</li>
+                    <li>Profit & loss basics</li>
+                    <li>Cash flow management</li>
+                </ul>
+            </li>
+            <li><strong>Inventory Control</strong>
+                <ul>
+                    <li>Tracking stock</li>
+                    <li>Ordering & restocking</li>
+                    <li>Minimizing losses</li>
+                </ul>
+            </li>
+            <li><strong>Operations & Workflow</strong>
+                <ul>
+                    <li>Efficient processes</li>
+                    <li>Staff coordination</li>
+                    <li>Daily task management</li>
+                </ul>
+            </li>
+            <li><strong>Customer Service</strong>
+                <ul>
+                    <li>Handling complaints</li>
+                    <li>Building trust</li>
+                    <li>Ensuring repeat customers</li>
+                </ul>
+            </li>
+        </ol>
     </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.startLearningBtn');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const foundations = button.closest('.card').querySelector('.foundations');
+        if (foundations.style.display === 'none' || foundations.style.display === '') {
+          foundations.style.display = 'block';
+          button.textContent = button.textContent.includes("Begin") ? "Hide Training" :
+                               button.textContent.includes("View") ? "Hide Guides" : "Hide";
+        } else {
+          foundations.style.display = 'none';
+          button.textContent = button.textContent.includes("Hide Training") ? "Begin Training" :
+                               button.textContent.includes("Hide Guides") ? "View Guides" : "Start Learning";
+        }
+      });
+    });
+  });
+</script>
 
 </section>
 

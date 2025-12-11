@@ -1,6 +1,3 @@
-"""
-Forms for the ACP Community Platform
-"""
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, IntegerField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, NumberRange

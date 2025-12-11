@@ -1,12 +1,24 @@
 from flask import Flask, Blueprint, render_template, redirect
 from models import db, Event, WellnessEntry, ForumPost
-from forms import csrf, EventForm, WellnessForm, ForumForm
+from flask_wtf.csrf import CSRFProtect
+from forms import EventForm, WellnessForm, ForumForm  
 
+# ==================== CONFIG ====================
 class Config:
-    SQLALCHEMY_DATABASE_URI = "sqlite:///final_project_db.db"
-    SECRET_KEY = "supersecretkey123"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///C:/Users/Cedrick Miguel/OneDrive/文件/ACP PROJECT/ACP-PROJECT/final_project_db.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = "supersecretkey123"
 
+# Initialize CSRF
+csrf = CSRFProtect()
+
+# ==================== BLUEPRINTS ====================
+main_bp = Blueprint("main", __name__)
+wellness_bp = Blueprint("wellness", __name__)
+event_bp = Blueprint("events", __name__)
+forum_bp = Blueprint("forum", __name__)
+
+# ==================== CREATE APP ====================
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -26,10 +38,7 @@ def create_app():
 
     return app
 
-
-# ==================== MAIN BLUEPRINT ====================
-main_bp = Blueprint("main", __name__)
-
+# ==================== MAIN ROUTES ====================
 @main_bp.route("/")
 def index():
     return render_template("index.html")
@@ -42,10 +51,7 @@ def health():
 def livelihood():
     return render_template("livelihood.html")
 
-
-# ==================== WELLNESS BLUEPRINT ====================
-wellness_bp = Blueprint("wellness", __name__)
-
+# ==================== WELLNESS ROUTES ====================
 @wellness_bp.route("/")
 def list_entries():
     entries = WellnessEntry.query.all()
@@ -66,10 +72,7 @@ def add_entry():
         return redirect("/wellness")
     return render_template("wellness_add.html", form=form)
 
-
-# ==================== EVENTS BLUEPRINT ====================
-event_bp = Blueprint("events", __name__)
-
+# ==================== EVENTS ROUTES ====================
 @event_bp.route("/")
 def events():
     events = Event.query.all()
@@ -90,10 +93,7 @@ def add_event():
         return redirect("/events")
     return render_template("events_add.html", form=form)
 
-
-# ==================== FORUM BLUEPRINT ====================
-forum_bp = Blueprint("forum", __name__)
-
+# ==================== FORUM ROUTES ====================
 @forum_bp.route("/")
 def forum():
     posts = ForumPost.query.all()
@@ -113,8 +113,7 @@ def add_post():
         return redirect("/forum")
     return render_template("forum_add.html", form=form)
 
-
-app = create_app()
-
+# ==================== RUN APP ====================
 if __name__ == "__main__":
+    app = create_app()
     app.run(debug=True)
