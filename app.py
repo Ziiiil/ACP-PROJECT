@@ -5,7 +5,7 @@ from forms import EventForm, WellnessForm, ForumForm
 
 # ==================== CONFIG ====================
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///C:/Users/Cedrick Miguel/OneDrive/文件/ACP PROJECT/ACP-PROJECT/final_project_db.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///final_project_db.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "supersecretkey123"
 
@@ -117,3 +117,4 @@ def add_post():
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
+
