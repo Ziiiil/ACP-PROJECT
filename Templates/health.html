@@ -6,38 +6,114 @@
     Your go-to space for improving physical, mental, and emotional health.
 </p>
 
-<!-- CATEGORY CARDS -->
+<!-- HEALTH CATEGORY CARDS -->
 <section class="health-grid">
 
+    <!-- Nutrition Card -->
     <div class="card health-card">
         <h3>🥗 Nutrition</h3>
-        <p>
-            Explore healthy eating tips, meal plans, and nutrition guides to keep your body fuelled and energized.
-        </p>
-        <a href="#" class="button">Learn More</a>
+        <button class="button expandBtn">Read Full Article</button>
+        <div class="full-article" style="display: none; margin-top: 10px;">
+            <h4>Nutrition: Fuel Your Body the Right Way</h4>
+            <p>Good nutrition is the cornerstone of a healthy life. What you eat affects your energy, mood, and long-term wellness.</p>
+            <h5>Key Principles:</h5>
+            <ul>
+                <li><strong>Balance Your Plate:</strong> Include a variety of fruits, vegetables, whole grains, lean proteins, and healthy fats.</li>
+                <li><strong>Hydration Matters:</strong> Drink plenty of water; it aids digestion, improves focus, and keeps skin healthy.</li>
+                <li><strong>Moderation is Key:</strong> Enjoy treats occasionally, but avoid excessive sugar, salt, and processed foods.</li>
+                <li><strong>Mindful Eating:</strong> Pay attention to hunger and fullness cues to prevent overeating.</li>
+            </ul>
+            <h5>Benefits of Proper Nutrition:</h5>
+            <ul>
+                <li>Supports a strong immune system</li>
+                <li>Maintains healthy weight</li>
+                <li>Improves mental clarity and focus</li>
+                <li>Reduces risk of chronic diseases</li>
+            </ul>
+            <p><strong>Tip:</strong> Start small—swap sugary drinks for water, or add an extra serving of vegetables to meals. Small steps lead to lasting change.</p>
+        </div>
     </div>
 
+    <!-- Exercise Card -->
     <div class="card health-card">
         <h3>🏋️ Exercise</h3>
-        <p>
-            Access workout routines, physical activity suggestions, and fitness programs for all ages.
-        </p>
-        <a href="#" class="button">Learn More</a>
+        <button class="button expandBtn">Read Full Article</button>
+        <div class="full-article" style="display: none; margin-top: 10px;">
+            <h4>Exercise: Move to Thrive</h4>
+            <p>Regular physical activity strengthens the body, boosts mood, and reduces stress. You don’t need a gym membership—just consistency.</p>
+            <h5>Types of Exercise:</h5>
+            <ul>
+                <li><strong>Cardio:</strong> Walking, running, cycling, swimming—great for heart health and endurance.</li>
+                <li><strong>Strength Training:</strong> Lifting weights, bodyweight exercises, or resistance bands build muscles and bone density.</li>
+                <li><strong>Flexibility & Mobility:</strong> Yoga, stretching, and Pilates improve posture, reduce injury risk, and relieve tension.</li>
+            </ul>
+            <h5>Exercise Tips:</h5>
+            <ul>
+                <li>Aim for at least 150 minutes of moderate activity per week.</li>
+                <li>Mix different types for a full-body approach.</li>
+                <li>Listen to your body and rest when needed.</li>
+            </ul>
+            <h5>Benefits:</h5>
+            <ul>
+                <li>Increases energy levels</li>
+                <li>Improves sleep quality</li>
+                <li>Reduces anxiety and depression</li>
+                <li>Supports healthy weight and metabolism</li>
+            </ul>
+            <p><strong>Tip:</strong> Find activities you enjoy—consistency comes easier when exercise feels fun.</p>
+        </div>
     </div>
 
+    <!-- Mental Health Card -->
     <div class="card health-card">
         <h3>🧠 Mental Health</h3>
-        <p>
-            Find resources, coping strategies, and guides to maintaining emotional wellness and mental resilience.
-        </p>
-        <a href="#" class="button">Learn More</a>
+        <button class="button expandBtn">Read Full Article</button>
+        <div class="full-article" style="display: none; margin-top: 10px;">
+            <h4>Mental Health: Nurturing Your Mind</h4>
+            <p>Mental health is just as important as physical health. Taking care of your mind helps you cope with stress, build resilience, and enjoy life.</p>
+            <h5>Ways to Support Mental Health:</h5>
+            <ul>
+                <li><strong>Practice Mindfulness:</strong> Meditation, deep breathing, or simply being present reduces stress.</li>
+                <li><strong>Stay Connected:</strong> Healthy relationships with friends and family provide emotional support.</li>
+                <li><strong>Regular Physical Activity:</strong> Exercise releases endorphins, naturally boosting mood.</li>
+                <li><strong>Set Realistic Goals:</strong> Break tasks into manageable steps to avoid overwhelm.</li>
+                <li><strong>Seek Help When Needed:</strong> Therapy, counseling, or support groups are valuable resources.</li>
+            </ul>
+            <h5>Benefits:</h5>
+            <ul>
+                <li>Improved emotional regulation</li>
+                <li>Reduced stress and anxiety</li>
+                <li>Enhanced focus and productivity</li>
+                <li>Greater overall happiness</li>
+            </ul>
+            <p><strong>Tip:</strong> Start small—spend 5 minutes a day on mindfulness or journaling to slowly build habits that support mental well-being.</p>
+        </div>
     </div>
 
 </section>
 
 <!-- FUTURE MODULE MESSAGE -->
 <div class="info-box">
-    <p>✨ More wellness content will be added soon — including articles, videos, trackers, and interactive tools!</p>
+    <p>✨ More wellness content will be added soon — including videos, trackers, and interactive tools!</p>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.expandBtn');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const article = button.closest('.card').querySelector('.full-article');
+            if (article.style.display === 'none' || article.style.display === '') {
+                article.style.display = 'block';
+                button.textContent = 'Hide Article';
+            } else {
+                article.style.display = 'none';
+                button.textContent = 'Read Full Article';
+            }
+        });
+    });
+});
+</script>
+
 {% endblock %}
+
