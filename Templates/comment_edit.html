@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Comment</title>
+</head>
+<body>
+
+<h2>Edit Comment</h2>
+
+<form method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <label>Username</label><br>
+    <input type="text" name="username" value="{{ comment.username }}" size="40"><br><br>
+
+    <label>Content</label><br>
+    <textarea name="content" rows="4" cols="60">{{ comment.content }}</textarea><br><br>
+
+    <button type="submit"
+            style="background:#28a745; color:white; padding:8px 14px; border:none; border-radius:5px;">
+        Save Changes
+    </button>
+
+    <a href="{{ url_for('forum.forum') }}"
+       style="margin-left:10px; text-decoration:none; padding:8px 14px; background:#6c757d; color:white; border-radius:5px;">
+        Cancel
+    </a>
+</form>
+
+</body>
+</html>

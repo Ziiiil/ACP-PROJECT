@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Wellness Entry</title>
+</head>
+<body>
+
+<h2>Edit Wellness Entry</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.date.label }}</label><br>
+    {{ form.date() }}<br><br>
+
+    <label>{{ form.mood.label }}</label><br>
+    {{ form.mood(size=40) }}<br><br>
+
+    <label>{{ form.steps.label }}</label><br>
+    {{ form.steps(size=40) }}<br><br>
+
+    <label>{{ form.notes.label }}</label><br>
+    {{ form.notes(rows=5, cols=60) }}<br><br>
+
+    <button type="submit"
+            style="background:#28a745; color:white; padding:8px 14px; border:none; border-radius:5px;">
+        Save Changes
+    </button>
+
+    <a href="{{ url_for('wellness.list_entries') }}"
+       style="margin-left:10px; text-decoration:none; padding:8px 14px; background:#6c757d; color:white; border-radius:5px;">
+        Cancel
+    </a>
+</form>
+
+</body>
+</html>

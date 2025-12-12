@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Event</title>
+</head>
+<body>
+
+<h2>Edit Event</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.title.label }}</label><br>
+    {{ form.title(size=60) }}<br><br>
+
+    <label>{{ form.description.label }}</label><br>
+    {{ form.description(rows=4, cols=60) }}<br><br>
+
+    <label>{{ form.event_date.label }}</label><br>
+    {{ form.event_date() }}<br><br>
+
+    <label>{{ form.location.label }}</label><br>
+    {{ form.location(size=60) }}<br><br>
+
+    <button type="submit"
+            style="background:#28a745; color:white; padding:8px 14px; border:none; border-radius:5px;">
+        Save Changes
+    </button>
+
+    <a href="{{ url_for('events.events') }}"
+       style="margin-left:10px; text-decoration:none; padding:8px 14px; background:#6c757d; color:white; border-radius:5px;">
+        Cancel
+    </a>
+</form>
+
+</body>
+</html>

@@ -21,7 +21,6 @@ body {
     line-height: 1.6;
 }
 
-
 /* ------------------------------
    Navigation Bar
 --------------------------------*/
@@ -47,9 +46,11 @@ nav h2 {
 }
 
 .nav-links a {
+    position: relative;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
+    padding-bottom: 4px;
     transition: color 0.3s ease;
 }
 
@@ -57,15 +58,20 @@ nav h2 {
     color: var(--primary);
 }
 
-nav a::after {
+/* Fix: underline animation */
+.nav-links a::after {
     content: "";
     position: absolute;
     width: 0;
     height: 2px;
     background: var(--primary);
-    bottom: -4px;
+    bottom: 0;
     left: 0;
     transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
 }
 
 /* ------------------------------
@@ -106,7 +112,6 @@ nav a::after {
     border-radius: 10px;
 }
 
-
 /* ------------------------------
    Features Grid
 --------------------------------*/
@@ -117,7 +122,7 @@ nav a::after {
     margin-top: 20px;
 }
 
-/* Divider line */
+/* Divider */
 .divider {
     margin: 40px 0;
     border: 0;
@@ -127,7 +132,7 @@ nav a::after {
 /* ------------------------------
    Buttons
 --------------------------------*/
-.button {
+.button, button {
     background: var(--primary);
     color: #fff;
     padding: 12px 20px;
@@ -140,26 +145,45 @@ nav a::after {
     border: none;
 }
 
-.button:hover {
+.button:hover, button:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
 }
 
+/* Special red delete buttons */
+.button-danger,
+button.button-danger {
+    background: #d9534f;
+}
+
+.button-danger:hover,
+button.button-danger:hover {
+    background: #b52b27;
+}
 
 /* ------------------------------
    Inputs & Textarea
 --------------------------------*/
-.input, .textarea {
+.input,
+.textarea,
+input[type="text"],
+textarea,
+input[type="date"],
+input[type="number"] {
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: var(--radius);
     font-size: 1rem;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    transition: all 0.3s ease;
+    background: #fff;
 }
 
-.input:focus, .textarea:focus {
+.input:focus,
+.textarea:focus,
+input:focus,
+textarea:focus {
     border-color: var(--primary);
     box-shadow: 0 0 6px rgba(2, 117, 216, 0.3);
     outline: none;
@@ -169,7 +193,6 @@ nav a::after {
     height: 120px;
     resize: vertical;
 }
-
 
 /* ------------------------------
    Cards
@@ -189,7 +212,6 @@ nav a::after {
     box-shadow: var(--shadow-md);
 }
 
-
 /* ------------------------------
    Tables
 --------------------------------*/
@@ -202,7 +224,8 @@ table {
     box-shadow: var(--shadow-sm);
 }
 
-table th, table td {
+table th,
+table td {
     padding: 15px;
     text-align: left;
 }
@@ -210,7 +233,6 @@ table th, table td {
 table th {
     background: var(--primary);
     color: #fff;
-    font-weight: 600;
 }
 
 table tr:nth-child(even) {
@@ -220,7 +242,6 @@ table tr:nth-child(even) {
 table tr:hover {
     background: #e6f0fa;
 }
-
 
 /* ------------------------------
    Responsive Adjustments
@@ -249,7 +270,7 @@ table tr:hover {
         font-size: 1.5rem;
     }
 
-    .button {
+    .button, button {
         width: 100%;
         text-align: center;
     }
@@ -279,7 +300,6 @@ table tr:hover {
     margin-bottom: 30px;
 }
 
-
 /* ------------------------------
    Health Category Grid
 --------------------------------*/
@@ -299,9 +319,8 @@ table tr:hover {
     margin-bottom: 18px;
 }
 
-
 /* ------------------------------
-   Info Box (for future modules)
+   Info Box
 --------------------------------*/
 .info-box {
     background: #e9f3ff;
@@ -314,7 +333,7 @@ table tr:hover {
 }
 
 /* ------------------------------
-   Livelihood Card Grid
+   Livelihood Grid
 --------------------------------*/
 .livelihood-grid {
     display: grid;
@@ -359,12 +378,10 @@ footer {
 .footer-section p {
     margin: 8px 0;
     color: #ccc;
-    line-height: 1.5;
 }
 
 .footer-section ul {
     list-style: none;
-    margin: 0;
     padding: 0;
 }
 
@@ -388,7 +405,7 @@ footer {
     margin-right: 12px;
     text-decoration: none;
     color: #ccc;
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: 0.3s ease;
 }
 
 .social-links a:hover {
@@ -403,13 +420,6 @@ footer {
     border-top: 1px solid #333;
     color: #999;
     font-size: 0.9rem;
-}
-
-/* Responsive spacing */
-@media (max-width: 600px) {
-    footer {
-        padding: 30px 20px;
-    }
 }
 
 /* ------------------------------
@@ -444,6 +454,3 @@ footer {
     from { opacity: 0; transform: translateY(-5px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-
-
-

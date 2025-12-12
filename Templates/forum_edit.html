@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Forum Post</title>
+</head>
+<body>
+
+<h2>Edit Forum Post</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <label>{{ form.username.label }}</label><br>
+    {{ form.username(size=40) }}<br><br>
+
+    <label>{{ form.title.label }}</label><br>
+    {{ form.title(size=60) }}<br><br>
+
+    <label>{{ form.content.label }}</label><br>
+    {{ form.content(rows=5, cols=60) }}<br><br>
+
+    <button type="submit"
+            style="background:#28a745; color:white; padding:8px 14px; border:none; border-radius:5px;">
+        Save Changes
+    </button>
+
+    <a href="{{ url_for('forum.forum') }}"
+       style="margin-left:10px; text-decoration:none; padding:8px 14px; background:#6c757d; color:white; border-radius:5px;">
+        Cancel
+    </a>
+</form>
+
+</body>
+</html>

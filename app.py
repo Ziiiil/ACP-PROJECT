@@ -1,7 +1,7 @@
-from flask import Flask, Blueprint, render_template, redirect, flash, request
+from flask import Flask, Blueprint, render_template, redirect, flash, request, url_for
 from models import db, Event, WellnessEntry, ForumPost, Comment
 from flask_wtf.csrf import CSRFProtect
-from forms import EventForm, WellnessForm, ForumForm  
+from forms import EventForm, WellnessForm, ForumForm, CommentForm
 import os
 
 # ==================== CONFIG ====================
@@ -11,7 +11,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "supersecretkey123"
 
-# Initialize CSRF
+
 csrf = CSRFProtect()
 
 # ==================== BLUEPRINTS ====================
@@ -25,7 +25,6 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Initialize extensions
     db.init_app(app)
     csrf.init_app(app)
 
@@ -38,7 +37,12 @@ def create_app():
     app.register_blueprint(event_bp, url_prefix="/events")
     app.register_blueprint(forum_bp, url_prefix="/forum")
 
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template("404.html"), 404
+
     return app
+
 
 # ==================== MAIN ROUTES ====================
 @main_bp.route("/")
@@ -53,29 +57,54 @@ def health():
 def livelihood():
     return render_template("livelihood.html")
 
+
 # ==================== WELLNESS ROUTES ====================
 @wellness_bp.route("/")
 def list_entries():
     entries = WellnessEntry.query.all()
     return render_template("wellness_list.html", entries=entries)
 
+
 @wellness_bp.route("/add", methods=["GET", "POST"])
 def add_entry():
     form = WellnessForm()
     if form.validate_on_submit():
-        # Create a new WellnessEntry object from the form data
         entry = WellnessEntry(
             date=form.date.data,
             mood=form.mood.data,
             steps=form.steps.data,
             notes=form.notes.data
         )
-        # Add to session and commit to save in the database
         db.session.add(entry)
         db.session.commit()
         flash("Wellness entry added!", "success")
-        return redirect("/wellness")
+        return redirect(url_for("wellness.list_entries"))
     return render_template("wellness_add.html", form=form)
+
+
+@wellness_bp.route("/edit/<int:entry_id>", methods=["GET", "POST"])
+def edit_wellness(entry_id):
+    entry = WellnessEntry.query.get_or_404(entry_id)
+    form = WellnessForm(obj=entry)
+    if form.validate_on_submit():
+        entry.date = form.date.data
+        entry.mood = form.mood.data
+        entry.steps = form.steps.data
+        entry.notes = form.notes.data
+        db.session.commit()
+        flash("Wellness entry updated!", "success")
+        return redirect(url_for("wellness.list_entries"))
+    return render_template("wellness_edit.html", form=form, entry=entry)
+
+
+@wellness_bp.route("/delete/<int:entry_id>", methods=["POST"])
+def delete_wellness(entry_id):
+    entry = WellnessEntry.query.get_or_404(entry_id)
+    db.session.delete(entry)
+    db.session.commit()
+    flash("Entry deleted!", "success")
+    return redirect(url_for("wellness.list_entries"))
+
 
 # ==================== EVENTS ROUTES ====================
 @event_bp.route("/")
@@ -83,23 +112,47 @@ def events():
     events = Event.query.all()
     return render_template("events.html", events=events)
 
+
 @event_bp.route("/add", methods=["GET", "POST"])
 def add_event():
     form = EventForm()
     if form.validate_on_submit():
-        # Create a new Event object from the form data
         event = Event(
             title=form.title.data,
             description=form.description.data,
             event_date=form.event_date.data,
             location=form.location.data
         )
-        # Add to session and commit to save in the database
         db.session.add(event)
         db.session.commit()
-        flash("Event added successfully!", "success")   
-        return redirect("/events")
+        flash("Event added successfully!", "success")
+        return redirect(url_for("events.events"))
     return render_template("events_add.html", form=form)
+
+
+@event_bp.route("/edit/<int:event_id>", methods=["GET", "POST"])
+def edit_event(event_id):
+    event = Event.query.get_or_404(event_id)
+    form = EventForm(obj=event)
+    if form.validate_on_submit():
+        event.title = form.title.data
+        event.description = form.description.data
+        event.event_date = form.event_date.data
+        event.location = form.location.data
+        db.session.commit()
+        flash("Event updated!", "success")
+        return redirect(url_for("events.events"))
+    return render_template("events_edit.html", form=form, event=event)
+
+
+@event_bp.route("/delete/<int:event_id>", methods=["POST"])
+def delete_event(event_id):
+    event = Event.query.get_or_404(event_id)
+    db.session.delete(event)
+    db.session.commit()
+    flash("Event deleted!", "success")
+    return redirect(url_for("events.events"))
+
 
 # ==================== FORUM ROUTES ====================
 @forum_bp.route("/")
@@ -107,11 +160,11 @@ def forum():
     posts = ForumPost.query.all()
     return render_template("forum.html", posts=posts)
 
+
 @forum_bp.route("/add", methods=["GET", "POST"])
 def add_post():
     form = ForumForm()
     if form.validate_on_submit():
-        # Create a new ForumPost object from the form data
         post = ForumPost(
             username=form.username.data,
             title=form.title.data,
@@ -120,15 +173,17 @@ def add_post():
         db.session.add(post)
         db.session.commit()
         flash("Post created successfully!", "success")
-        return redirect("/forum")
+        return redirect(url_for("forum.forum"))
     return render_template("forum_add.html", form=form)
 
-# Inline add comment route
-@forum_bp.route("/<int:post_id>/comment", methods=["POST"], endpoint="add_comment_inline")
+
+# ADD COMMENT
+@forum_bp.route("/<int:post_id>/comment", methods=["POST"])
 def add_comment(post_id):
     post = ForumPost.query.get_or_404(post_id)
     username = request.form.get("username")
     content = request.form.get("content")
+
     if username and content:
         comment = Comment(forum_post_id=post.id, username=username, content=content)
         db.session.add(comment)
@@ -136,10 +191,63 @@ def add_comment(post_id):
         flash("Comment added!", "success")
     else:
         flash("All fields are required!", "danger")
-    return redirect("/forum")
+
+    return redirect(url_for("forum.forum"))
+
+
+# EDIT POST
+@forum_bp.route("/edit/<int:post_id>", methods=["GET", "POST"])
+def edit_forum(post_id):
+    post = ForumPost.query.get_or_404(post_id)
+    form = ForumForm(obj=post)
+    if form.validate_on_submit():
+        post.username = form.username.data
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash("Post updated!", "success")
+        return redirect(url_for("forum.forum"))
+    return render_template("forum_edit.html", form=form, post=post)
+
+
+# DELETE POST
+@forum_bp.route("/delete/<int:post_id>", methods=["POST"])
+def delete_forum(post_id):
+    post = ForumPost.query.get_or_404(post_id)
+    Comment.query.filter_by(forum_post_id=post_id).delete()
+    db.session.delete(post)
+    db.session.commit()
+    flash("Post deleted!", "success")
+    return redirect(url_for("forum.forum"))
+
+
+# EDIT COMMENT
+@forum_bp.route("/comment/edit/<int:comment_id>", methods=["GET", "POST"])
+def edit_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    form = CommentForm(obj=comment)
+
+    if form.validate_on_submit():
+        comment.username = form.username.data
+        comment.content = form.content.data
+        db.session.commit()
+        flash("Comment updated!", "success")
+        return redirect(url_for("forum.forum"))
+
+    return render_template("comment_edit.html", form=form, comment=comment)
+
+
+# DELETE COMMENT
+@forum_bp.route("/comment/delete/<int:comment_id>", methods=["POST"])
+def delete_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    flash("Comment deleted!", "success")
+    return redirect(url_for("forum.forum"))
+
 
 # ==================== RUN APP ====================
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)
-
