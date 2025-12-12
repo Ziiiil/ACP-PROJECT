@@ -2,17 +2,73 @@
 {% block content %}
 
 <h2>Community Forum</h2>
-<a href="/forum/add" class="button">Create New Post</a>
+
+<a href="/forum/add" class="button"
+   style="background-color:#007BFF; color:white; padding:8px 16px;
+          border-radius:5px; text-decoration:none;">
+    Create New Post
+</a>
 
 <hr>
 
 {% if posts %}
     {% for p in posts %}
-        <div class="card">
+        <div class="card"
+             style="padding:15px; margin-bottom:20px; border:1px solid #ddd;
+                    border-radius:8px; background-color:#f9f9f9;">
+
             <h3>{{ p.title }}</h3>
             <p><b>By:</b> {{ p.username }}</p>
             <p>{{ p.content }}</p>
-            <small>Posted on {{ p.created_at }}</small>
+            <small>Posted on {{ p.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+
+            <!-- COMMENTS LIST -->
+            <div class="comments"
+                 style="margin-top:15px; padding-top:10px; border-top:1px solid #ccc;">
+                <h4>Comments:</h4>
+
+                <ul style="list-style-type:none; padding-left:0;">
+                    {% for comment in p.comments %}
+                        <li style="margin-bottom:10px; padding:5px;
+                                   background-color:#eef6ff; border-radius:5px;">
+                            <strong>{{ comment.username }}</strong>: {{ comment.content }}
+                            <br>
+                            <small style="color:#555;">
+                                ({{ comment.created_at.strftime('%Y-%m-%d %H:%M') }})
+                            </small>
+                        </li>
+                    {% else %}
+                        <li>No comments yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- ADD COMMENT FORM -->
+            <div class="add-comment" style="margin-top:10px;">
+
+                <form action="{{ url_for('forum.add_comment_inline', post_id=p.id) }}"
+                      method="POST"
+                      style="display:flex; flex-direction:column; gap:8px;">
+
+                    <!-- HIDDEN CSRF TOKEN -->
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                    <input type="text" name="username" placeholder="Your name" required
+                           style="padding:8px; border-radius:5px; border:1px solid #ccc;">
+
+                    <textarea name="content" placeholder="Write a comment..." required
+                              style="padding:8px; border-radius:5px; border:1px solid #ccc;"></textarea>
+
+                    <button type="submit"
+                            style="background-color:#007BFF; color:white;
+                                   border:none; padding:8px 16px;
+                                   border-radius:5px; cursor:pointer;">
+                        Add Comment
+                    </button>
+                </form>
+
+            </div>
+
         </div>
     {% endfor %}
 {% else %}

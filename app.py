@@ -1,11 +1,13 @@
-from flask import Flask, Blueprint, render_template, redirect
-from models import db, Event, WellnessEntry, ForumPost
+from flask import Flask, Blueprint, render_template, redirect, flash, request
+from models import db, Event, WellnessEntry, ForumPost, Comment
 from flask_wtf.csrf import CSRFProtect
 from forms import EventForm, WellnessForm, ForumForm  
+import os
 
 # ==================== CONFIG ====================
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///final_project_db.db'
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'final_project_db.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "supersecretkey123"
 
@@ -61,14 +63,17 @@ def list_entries():
 def add_entry():
     form = WellnessForm()
     if form.validate_on_submit():
+        # Create a new WellnessEntry object from the form data
         entry = WellnessEntry(
             date=form.date.data,
             mood=form.mood.data,
             steps=form.steps.data,
             notes=form.notes.data
         )
+        # Add to session and commit to save in the database
         db.session.add(entry)
         db.session.commit()
+        flash("Wellness entry added!", "success")
         return redirect("/wellness")
     return render_template("wellness_add.html", form=form)
 
@@ -82,14 +87,17 @@ def events():
 def add_event():
     form = EventForm()
     if form.validate_on_submit():
+        # Create a new Event object from the form data
         event = Event(
             title=form.title.data,
             description=form.description.data,
             event_date=form.event_date.data,
             location=form.location.data
         )
+        # Add to session and commit to save in the database
         db.session.add(event)
         db.session.commit()
+        flash("Event added successfully!", "success")   
         return redirect("/events")
     return render_template("events_add.html", form=form)
 
@@ -103,6 +111,7 @@ def forum():
 def add_post():
     form = ForumForm()
     if form.validate_on_submit():
+        # Create a new ForumPost object from the form data
         post = ForumPost(
             username=form.username.data,
             title=form.title.data,
@@ -110,8 +119,24 @@ def add_post():
         )
         db.session.add(post)
         db.session.commit()
+        flash("Post created successfully!", "success")
         return redirect("/forum")
     return render_template("forum_add.html", form=form)
+
+# Inline add comment route
+@forum_bp.route("/<int:post_id>/comment", methods=["POST"], endpoint="add_comment_inline")
+def add_comment(post_id):
+    post = ForumPost.query.get_or_404(post_id)
+    username = request.form.get("username")
+    content = request.form.get("content")
+    if username and content:
+        comment = Comment(forum_post_id=post.id, username=username, content=content)
+        db.session.add(comment)
+        db.session.commit()
+        flash("Comment added!", "success")
+    else:
+        flash("All fields are required!", "danger")
+    return redirect("/forum")
 
 # ==================== RUN APP ====================
 if __name__ == "__main__":

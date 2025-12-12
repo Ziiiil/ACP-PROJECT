@@ -26,6 +26,17 @@ class ForumPost(db.Model):
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    forum_post_id = db.Column(db.Integer, db.ForeignKey('forum_post.id'), nullable=False)  # Foreign key
+    username = db.Column(db.String(50), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Relationship to easily access the parent ForumPost
+    forum_post = db.relationship('ForumPost', backref=db.backref('comments', lazy=True))
+
+
 
 
 

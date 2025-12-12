@@ -35,3 +35,8 @@ class WellnessForm(FlaskForm):
     steps = IntegerField("Steps", validators=[NumberRange(min=0)])
     notes = TextAreaField("Notes")
     submit = SubmitField("Save Entry")
+
+class CommentForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    content = TextAreaField('Comment', validators=[DataRequired()])
+    submit = SubmitField('Add Comment')
