@@ -20,7 +20,6 @@
             <h3>{{ p.title }}</h3>
             <p><b>By:</b> {{ p.username }}</p>
             <p>{{ p.content }}</p>
-            <small>Posted on {{ p.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
 
             <!-- COMMENTS LIST -->
             <div class="comments"
@@ -32,10 +31,6 @@
                         <li style="margin-bottom:10px; padding:5px;
                                    background-color:#eef6ff; border-radius:5px;">
                             <strong>{{ comment.username }}</strong>: {{ comment.content }}
-                            <br>
-                            <small style="color:#555;">
-                                ({{ comment.created_at.strftime('%Y-%m-%d %H:%M') }})
-                            </small>
                         </li>
                     {% else %}
                         <li>No comments yet.</li>
@@ -76,3 +71,4 @@
 {% endif %}
 
 {% endblock %}
+
