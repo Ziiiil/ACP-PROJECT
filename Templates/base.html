@@ -21,7 +21,7 @@
 
 <div class="container">
 
-    <!-- Flash messages -->
+
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         <div class="flash-container">
@@ -34,12 +34,12 @@
       {% endif %}
     {% endwith %}
 
-    <!-- Page content -->
+   
     {% block content %}{% endblock %}
 
 </div>
 
-<!-- FOOTER -->
+
 <footer>
     <div class="footer-content">
 

@@ -1,6 +1,4 @@
-/* ------------------------------
-   Global Styles
---------------------------------*/
+
 :root {
     --primary: #0275d8;
     --primary-dark: #025aa5;
@@ -21,9 +19,7 @@ body {
     line-height: 1.6;
 }
 
-/* ------------------------------
-   Navigation Bar
---------------------------------*/
+
 nav {
     background: #333;
     padding: 20px 40px;
@@ -58,7 +54,7 @@ nav h2 {
     color: var(--primary);
 }
 
-/* Fix: underline animation */
+
 .nav-links a::after {
     content: "";
     position: absolute;
@@ -74,18 +70,14 @@ nav h2 {
     width: 100%;
 }
 
-/* ------------------------------
-   Container
---------------------------------*/
+
 .container {
     padding: 30px 40px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* ------------------------------
-   Hero Section
---------------------------------*/
+
 .hero {
     text-align: center;
     padding: 60px 20px;
@@ -112,9 +104,7 @@ nav h2 {
     border-radius: 10px;
 }
 
-/* ------------------------------
-   Features Grid
---------------------------------*/
+
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -122,16 +112,14 @@ nav h2 {
     margin-top: 20px;
 }
 
-/* Divider */
+
 .divider {
     margin: 40px 0;
     border: 0;
     border-top: 2px solid #ddd;
 }
 
-/* ------------------------------
-   Buttons
---------------------------------*/
+
 .button, button {
     background: var(--primary);
     color: #fff;
@@ -150,7 +138,7 @@ nav h2 {
     transform: translateY(-2px);
 }
 
-/* Special red delete buttons */
+
 .button-danger,
 button.button-danger {
     background: #d9534f;
@@ -161,9 +149,7 @@ button.button-danger:hover {
     background: #b52b27;
 }
 
-/* ------------------------------
-   Inputs & Textarea
---------------------------------*/
+
 .input,
 .textarea,
 input[type="text"],
@@ -194,9 +180,7 @@ textarea:focus {
     resize: vertical;
 }
 
-/* ------------------------------
-   Cards
---------------------------------*/
+
 .card {
     background: var(--card-bg);
     padding: 20px;
@@ -212,9 +196,7 @@ textarea:focus {
     box-shadow: var(--shadow-md);
 }
 
-/* ------------------------------
-   Tables
---------------------------------*/
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -243,9 +225,7 @@ table tr:hover {
     background: #e6f0fa;
 }
 
-/* ------------------------------
-   Responsive Adjustments
---------------------------------*/
+
 @media (max-width: 900px) {
 
     nav {
@@ -286,9 +266,7 @@ table tr:hover {
     }
 }
 
-/* ------------------------------
-   Page Titles
---------------------------------*/
+
 .page-title {
     font-size: 2.2rem;
     margin-bottom: 10px;
@@ -300,9 +278,7 @@ table tr:hover {
     margin-bottom: 30px;
 }
 
-/* ------------------------------
-   Health Category Grid
---------------------------------*/
+
 .health-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -319,9 +295,7 @@ table tr:hover {
     margin-bottom: 18px;
 }
 
-/* ------------------------------
-   Info Box
---------------------------------*/
+
 .info-box {
     background: #e9f3ff;
     padding: 20px;
@@ -332,9 +306,7 @@ table tr:hover {
     font-size: 1.05rem;
 }
 
-/* ------------------------------
-   Livelihood Grid
---------------------------------*/
+
 .livelihood-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -351,9 +323,7 @@ table tr:hover {
     margin-bottom: 18px;
 }
 
-/* ------------------------------
-   Footer
---------------------------------*/
+
 footer {
     background: #222;
     color: #ddd;
@@ -399,7 +369,7 @@ footer {
     color: var(--primary);
 }
 
-/* Social Icons */
+
 .social-links a {
     font-size: 1.5rem;
     margin-right: 12px;
@@ -413,7 +383,7 @@ footer {
     transform: translateY(-2px);
 }
 
-/* Footer bottom */
+
 .footer-bottom {
     text-align: center;
     padding-top: 15px;
@@ -422,9 +392,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* ------------------------------
-   Flash Messages
---------------------------------*/
+
 .flash-container {
     margin-bottom: 20px;
 }

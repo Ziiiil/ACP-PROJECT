@@ -21,7 +21,7 @@
             <p><b>By:</b> {{ p.username }}</p>
             <p>{{ p.content }}</p>
 
-            <!-- EDIT & DELETE BUTTONS FOR A POST -->
+            
             <div style="margin-top:10px; display:flex; gap:10px;">
                 <a href="{{ url_for('forum.edit_forum', post_id=p.id) }}"
                 style="background:#28a745; padding:6px 12px; color:white; border-radius:5px; text-decoration:none;">
@@ -37,7 +37,7 @@
                 </form>
             </div>
 
-            <!-- COMMENTS LIST -->
+            
             <div class="comments"
                  style="margin-top:15px; padding-top:10px; border-top:1px solid #ccc;">
                 <h4>Comments:</h4>
@@ -70,7 +70,7 @@
                 </ul>
             </div>
 
-            <!-- ADD COMMENT FORM -->
+          
             <div class="add-comment" style="margin-top:10px;">
 
                 <form action="{{ url_for('forum.add_comment', post_id=p.id) }}"

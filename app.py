@@ -4,7 +4,7 @@ from flask_wtf.csrf import CSRFProtect
 from forms import EventForm, WellnessForm, ForumForm, CommentForm
 import os
 
-# ==================== CONFIG ====================
+
 class Config:
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'final_project_db.db')
@@ -14,13 +14,13 @@ class Config:
 
 csrf = CSRFProtect()
 
-# ==================== BLUEPRINTS ====================
+
 main_bp = Blueprint("main", __name__)
 wellness_bp = Blueprint("wellness", __name__)
 event_bp = Blueprint("events", __name__)
 forum_bp = Blueprint("forum", __name__)
 
-# ==================== CREATE APP ====================
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -31,7 +31,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-    # Register blueprints
+
     app.register_blueprint(main_bp)
     app.register_blueprint(wellness_bp, url_prefix="/wellness")
     app.register_blueprint(event_bp, url_prefix="/events")
@@ -44,7 +44,7 @@ def create_app():
     return app
 
 
-# ==================== MAIN ROUTES ====================
+
 @main_bp.route("/")
 def index():
     return render_template("index.html")
@@ -58,7 +58,7 @@ def livelihood():
     return render_template("livelihood.html")
 
 
-# ==================== WELLNESS ROUTES ====================
+
 @wellness_bp.route("/")
 def list_entries():
     entries = WellnessEntry.query.all()
@@ -106,7 +106,7 @@ def delete_wellness(entry_id):
     return redirect(url_for("wellness.list_entries"))
 
 
-# ==================== EVENTS ROUTES ====================
+
 @event_bp.route("/")
 def events():
     events = Event.query.all()
@@ -154,7 +154,7 @@ def delete_event(event_id):
     return redirect(url_for("events.events"))
 
 
-# ==================== FORUM ROUTES ====================
+
 @forum_bp.route("/")
 def forum():
     posts = ForumPost.query.all()
@@ -177,7 +177,7 @@ def add_post():
     return render_template("forum_add.html", form=form)
 
 
-# ADD COMMENT
+
 @forum_bp.route("/<int:post_id>/comment", methods=["POST"])
 def add_comment(post_id):
     post = ForumPost.query.get_or_404(post_id)
@@ -195,7 +195,7 @@ def add_comment(post_id):
     return redirect(url_for("forum.forum"))
 
 
-# EDIT POST
+
 @forum_bp.route("/edit/<int:post_id>", methods=["GET", "POST"])
 def edit_forum(post_id):
     post = ForumPost.query.get_or_404(post_id)
@@ -210,7 +210,7 @@ def edit_forum(post_id):
     return render_template("forum_edit.html", form=form, post=post)
 
 
-# DELETE POST
+
 @forum_bp.route("/delete/<int:post_id>", methods=["POST"])
 def delete_forum(post_id):
     post = ForumPost.query.get_or_404(post_id)
@@ -221,7 +221,7 @@ def delete_forum(post_id):
     return redirect(url_for("forum.forum"))
 
 
-# EDIT COMMENT
+
 @forum_bp.route("/comment/edit/<int:comment_id>", methods=["GET", "POST"])
 def edit_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
@@ -237,7 +237,7 @@ def edit_comment(comment_id):
     return render_template("comment_edit.html", form=form, comment=comment)
 
 
-# DELETE COMMENT
+
 @forum_bp.route("/comment/delete/<int:comment_id>", methods=["POST"])
 def delete_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
@@ -247,7 +247,7 @@ def delete_comment(comment_id):
     return redirect(url_for("forum.forum"))
 
 
-# ==================== RUN APP ====================
+
 if __name__ == "__main__":
     app = create_app()
     app.run(debug=True)

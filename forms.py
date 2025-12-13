@@ -3,11 +3,11 @@ from wtforms import StringField, SelectField, IntegerField, TextAreaField, Submi
 from wtforms.validators import DataRequired, NumberRange
 from flask_wtf.csrf import CSRFProtect
 
-# Initialize CSRF protection
+
 csrf = CSRFProtect()
 
 
-# ==================== EVENT FORM ====================
+
 class EventForm(FlaskForm):
     title = StringField("Event Title", validators=[DataRequired()])
     description = TextAreaField("Description")
@@ -16,7 +16,7 @@ class EventForm(FlaskForm):
     submit = SubmitField("Add Event")
 
 
-# ==================== FORUM POST FORM ====================
+
 class ForumForm(FlaskForm):
     username = StringField("Your Name", validators=[DataRequired()])
     title = StringField("Post Title", validators=[DataRequired()])
@@ -24,7 +24,7 @@ class ForumForm(FlaskForm):
     submit = SubmitField("Post")
 
 
-# ==================== WELLNESS FORM ====================
+
 class WellnessForm(FlaskForm):
     date = StringField("Date (YYYY-MM-DD)", validators=[DataRequired()])
     mood = SelectField(
@@ -35,6 +35,7 @@ class WellnessForm(FlaskForm):
     steps = IntegerField("Steps", validators=[NumberRange(min=0)])
     notes = TextAreaField("Notes")
     submit = SubmitField("Save Entry")
+
 
 class CommentForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

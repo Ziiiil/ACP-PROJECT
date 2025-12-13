@@ -16,7 +16,7 @@ class Event(db.Model):
     description = db.Column(db.Text)
     event_date = db.Column(db.String(20), nullable=False)
     location = db.Column(db.String(100), nullable=False)
-    # created_at removed
+
 
 
 class ForumPost(db.Model):
@@ -24,7 +24,7 @@ class ForumPost(db.Model):
     username = db.Column(db.String(50), nullable=False)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    # created_at removed
+
 
 
 class Comment(db.Model):
@@ -32,7 +32,7 @@ class Comment(db.Model):
     forum_post_id = db.Column(db.Integer, db.ForeignKey('forum_post.id'), nullable=False)
     username = db.Column(db.String(50), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    # created_at removed
+
 
     forum_post = db.relationship('ForumPost', backref=db.backref('comments', lazy=True))
 
